@@ -7,7 +7,8 @@
 // Task21();
 // Task22();
 // Task23();
-Task24();
+// Task24();
+// TaskProject();
 
 void Task11()
 {
@@ -31,8 +32,12 @@ void Task12()
         Console.WriteLine("Enter your number(Separate by enter):");
         numberArray[index] = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
     }
-    Task12PosNeg(out var max,out var min, numberArray);
-    Console.WriteLine("Maximum number: " + max + " Minimum number: " + min);
+    Task12PosNeg(out int[] list, numberArray);
+    foreach (var num in list)
+    {
+        Console.WriteLine("Positive numbers: " + num);
+    }
+    Console.WriteLine("Positive numbers: " + list);
 }
 void Task13()
 {
@@ -131,7 +136,47 @@ void Task24()
     {
         {1,2,3}
     };
-    
+    var row = 3;
+    var column = 3;
+    for (var i = 0; i < row; i++)
+    {
+        for (var j = 0; j < column; j++)
+        {
+            arrayA[i, j] *= arrayB[0, j];
+        }
+    }
+    for (var i = 0; i < row; i++)
+    {
+        for (var j = 0; j < column; j++)
+        {
+            Console.Write(arrayA[i, j]+"\t");
+        }
+        Console.WriteLine();
+    }
+}
+void TaskProject()
+{
+    Console.WriteLine("Welcome to tic tac toe game:");
+    Console.WriteLine("Please select option(1.New Game, 2.Exit):");
+    var falseSelection = false;
+    while (falseSelection == false)
+    {
+        var firstMenuSelection = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+        switch (firstMenuSelection)
+        {
+            case 1 :
+                OpponentSelection();
+                falseSelection = true;
+                break;
+            case 2 :
+                Console.WriteLine("Sad we will quit the game");
+                falseSelection = true;
+                break;
+            default:
+                Console.WriteLine("Wrong selection");
+                break;
+        }
+    }
 }
 
 int Task11Sum(int[] numberArray)
@@ -143,19 +188,24 @@ int Task11Sum(int[] numberArray)
     }
     return sum;
 }
-void Task12PosNeg(out int max, out int min, int[] array)
+void Task12PosNeg(out int[]list, int[] array)
 {
-    max = 0;
-    min = 0;
+    var arrayLength = 0;
+    var count = 0;
     foreach (var numbers in array)
     {
-        if (numbers > max)
+        if (numbers >= 0)
         {
-            max = numbers;
+            arrayLength++;
         }
-        else
+    }
+    list = new int[arrayLength];
+    foreach (var num in array)
+    {
+        if (num >= 0)
         {
-            min = numbers;
+            list[0] = num;
+            count++;
         }
     }
 }
@@ -210,8 +260,8 @@ void PrintCardDeck(string[,] array)
 }
 void FindRepeatedNumbersInMatrix(int[,] array)
 {
-    int rows = 2;
-    int columns = 19;
+    var rows = 2;
+    var columns = 19;
     Console.Write("Repeating numbers are: ");
     for (var i = 0; i < rows; i++)
     {
@@ -227,8 +277,8 @@ void FindRepeatedNumbersInMatrix(int[,] array)
 }
 void FindRepeatedNamesInMatrix(string[,] array)
 {
-    int rows = 2;
-    int columns = 3;
+    var rows = 2;
+    var columns = 3;
     Console.Write("Repeating names are: ");
     for (var i = 0; i < rows; i++)
     {
@@ -243,18 +293,40 @@ void FindRepeatedNamesInMatrix(string[,] array)
         break;
     }
 }
-
-// int[,,] Task21MultiplicationMatrix(int[] arrayA, int[] arrayB)
-// {
-//     int row = 3;
-//     int column = 3;
-//     int[,,] newMatrix = new int[3,3,3];
-//     for (int i = 0; i < row; i++)
-//     {
-//         for (int j = 0; j < column; j++)
-//         {
-//             
-//         }
-//     }
-//     return 
-// }
+void OpponentSelection()
+{
+    Console.WriteLine("Please select opponent(1.Two Players, 2.vs Computer):");
+    var falseSelection = false;
+    while (falseSelection == false)
+    {
+        var firstMenuSelection = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+        switch (firstMenuSelection)
+        {
+            case 1 :
+                TwoPlayers();
+                falseSelection = true;
+                break;
+            case 2 :
+                VersusComputer();
+                falseSelection = true;
+                break;
+            default:
+                Console.WriteLine("Wrong selection");
+                break;
+        }
+    }
+}
+void TwoPlayers()
+{
+    int[,] array =
+    {
+        {0,0,0},
+        {0,0,0},
+        {0,0,0}
+    };
+    Console.WriteLine("VST");
+}
+void VersusComputer()
+{
+   Console.WriteLine("VSC");
+}
